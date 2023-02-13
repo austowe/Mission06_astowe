@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Add a Movie";
+}
+
+@model Mission06_astowe.Models.NewMovie
+
+<div>
+    <form>
+        <label asp-for="Title">Movie Title: </label>
+        <input asp-for="Title" type="text" id="title" required />
+        <br />
+        <label asp-for="Year">Year: </label>
+        <input asp-for="Year" type="number" id="year" required />
+        <br />
+        <label asp-for="Category">Category: </label>
+        <input asp-for="Category" type="text" id="category" required />
+        <br />
+        <label asp-for="Director">Director: </label>
+        <input asp-for="Director" type="text" id="director" required />
+        <br />
+        <label asp-for="Rating">Rating: </label>
+        <select asp-for="Rating">
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG13">PG-13</option>
+            <option value="R">R</option>
+        </select>
+    </form>
+</div>
