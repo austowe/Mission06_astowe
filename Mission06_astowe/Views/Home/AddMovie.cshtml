@@ -6,7 +6,7 @@
 
 <br />
 <div>
-    <form>
+    <form method="post">
         <label asp-for="Title">Movie Title: </label>
         <input asp-for="Title" type="text" id="title" required />
         <br />
@@ -35,6 +35,7 @@
         <br />
         <label asp-for="Notes">Notes: </label>
         <textarea asp-for="Notes" id="Notes"></textarea>
-
+        <br />
+        <button type="submit">Submit Movie</button>
     </form>
 </div>

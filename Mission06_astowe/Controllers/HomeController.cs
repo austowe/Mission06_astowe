@@ -12,10 +12,12 @@ namespace Mission06_astowe.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private MovieContext movieContext { get; set; }
+        //constructor
+        public HomeController(ILogger<HomeController> logger, MovieContext mc)
         {
             _logger = logger;
+            movieContext = mc;
         }
 
         public IActionResult Index()
@@ -23,9 +25,18 @@ namespace Mission06_astowe.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult AddMovie()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddMovie(NewMovie nm)
+        {
+            movieContext.Add(nm);
+            movieContext.SaveChanges();
+            return View("Confirmation", nm);
         }
 
         public IActionResult Privacy()
