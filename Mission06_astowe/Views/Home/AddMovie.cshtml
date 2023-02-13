@@ -4,6 +4,7 @@
 
 @model Mission06_astowe.Models.NewMovie
 
+<br />
 <div>
     <form>
         <label asp-for="Title">Movie Title: </label>
@@ -25,5 +26,15 @@
             <option value="PG13">PG-13</option>
             <option value="R">R</option>
         </select>
+        <br />
+        <label asp-for="Edited">Edited: </label>
+        <input asp-for="Edited" type="checkbox" id="edited"/>
+        <br />
+        <label asp-for="LentTo">Lent to: </label>
+        <input asp-for="LentTo" type="text" id="lento"/>
+        <br />
+        <label asp-for="Notes">Notes: </label>
+        <textarea asp-for="Notes" id="Notes"></textarea>
+
     </form>
 </div>
