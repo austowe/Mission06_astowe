@@ -15,15 +15,45 @@ namespace Mission06_astowe.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.32");
 
+            modelBuilder.Entity("Mission06_astowe.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Action"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Scifi"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Adventure"
+                        });
+                });
+
             modelBuilder.Entity("Mission06_astowe.Models.NewMovie", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -52,13 +82,15 @@ namespace Mission06_astowe.Migrations
 
                     b.HasKey("MovieId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("movies");
 
                     b.HasData(
                         new
                         {
                             MovieId = 1,
-                            Category = "Action",
+                            CategoryId = 1,
                             Director = "Christopher Nolan",
                             Edited = false,
                             LentTo = "",
@@ -70,7 +102,7 @@ namespace Mission06_astowe.Migrations
                         new
                         {
                             MovieId = 2,
-                            Category = "Sci-fi/Adventure",
+                            CategoryId = 2,
                             Director = "Ridley Scott",
                             Edited = false,
                             LentTo = "",
@@ -82,7 +114,7 @@ namespace Mission06_astowe.Migrations
                         new
                         {
                             MovieId = 3,
-                            Category = "Sci-fi/Action",
+                            CategoryId = 2,
                             Director = "Gareth Edwards",
                             Edited = false,
                             LentTo = "",
@@ -91,6 +123,15 @@ namespace Mission06_astowe.Migrations
                             Title = "Rogue One",
                             Year = 2016
                         });
+                });
+
+            modelBuilder.Entity("Mission06_astowe.Models.NewMovie", b =>
+                {
+                    b.HasOne("Mission06_astowe.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

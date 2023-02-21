@@ -4,8 +4,8 @@
 
 @model List<NewMovie>
 
-<table class="table table-bordered">
-    <thead>
+<table class="table table-bordered table-striped">
+    <thead class="font-weight-bold">
         <tr>
             <td>Title</td>
             <td>Year</td>
@@ -24,7 +24,7 @@
                 <tr>
                     <td>@x.Title</td>
                     <td>@x.Year</td>
-                    <td>@x.Category</td>
+                    <td>@x.Category.CategoryName</td>
                     <td>@x.Director</td>
                     <td>@x.Rating</td>
                     <td>@x.Edited</td>

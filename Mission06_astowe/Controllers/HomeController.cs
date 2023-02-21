@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission06_astowe.Models;
 using System;
@@ -26,6 +27,8 @@ namespace Mission06_astowe.Controllers
         [HttpGet]
         public IActionResult AddMovie()
         {
+            ViewBag.Categories = movieContext.Categories.ToList();
+
             return View();
         }
 
@@ -40,7 +43,10 @@ namespace Mission06_astowe.Controllers
         [HttpGet]
         public IActionResult MovieList()
         {
-            var movies = movieContext.responses.ToList();
+            var movies = movieContext.movies
+                .Include(x => x.Category)
+                .OrderBy(x => x.Year)
+                .ToList();
 
             return View(movies);
         }

@@ -15,8 +15,7 @@ namespace Mission06_astowe.Models
         public string Title { get; set; }
         [Required]
         public int Year { get; set; }
-        [Required]
-        public string Category { get; set; }
+
         [Required]
         public string Director { get; set; }
         [Required]
@@ -26,7 +25,8 @@ namespace Mission06_astowe.Models
         [MaxLength(25)]
         public string Notes { get; set; }
 
-
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
 
     }
 }

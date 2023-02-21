@@ -15,9 +15,16 @@ namespace Mission06_astowe.Models
         }
 
         public DbSet<NewMovie> movies { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
+            mb.Entity<Category>().HasData(
+                new Category { CategoryId=1, CategoryName="Action"},
+                new Category { CategoryId=2, CategoryName="Scifi"},
+                new Category { CategoryId=3, CategoryName="Adventure"}
+            );
+
             mb.Entity<NewMovie>().HasData(
 
                 //seeded data
@@ -28,7 +35,7 @@ namespace Mission06_astowe.Models
                     Year = 2010,
                     Director = "Christopher Nolan",
                     Rating = "PG13",
-                    Category = "Action",
+                    CategoryId = 1,
                     Edited = false,
                     LentTo = "",
                     Notes = ""
@@ -40,7 +47,7 @@ namespace Mission06_astowe.Models
                     Year = 2015,
                     Director = "Ridley Scott",
                     Rating = "PG13",
-                    Category = "Sci-fi/Adventure",
+                    CategoryId = 2,
                     Edited = false,
                     LentTo = "",
                     Notes = ""
@@ -52,7 +59,7 @@ namespace Mission06_astowe.Models
                     Year = 2016,
                     Director = "Gareth Edwards",
                     Rating = "PG13",
-                    Category = "Sci-fi/Action",
+                    CategoryId = 2,
                     Edited = false,
                     LentTo = "",
                     Notes = ""
