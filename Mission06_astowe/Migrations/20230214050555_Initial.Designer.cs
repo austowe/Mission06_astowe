@@ -8,7 +8,7 @@ using Mission06_astowe.Models;
 namespace Mission06_astowe.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20230213052833_Initial")]
+    [Migration("20230214050555_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +38,8 @@ namespace Mission06_astowe.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Notes")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(25);
 
                     b.Property<string>("Rating")
                         .IsRequired()
@@ -53,7 +54,45 @@ namespace Mission06_astowe.Migrations
 
                     b.HasKey("MovieId");
 
-                    b.ToTable("responses");
+                    b.ToTable("movies");
+
+                    b.HasData(
+                        new
+                        {
+                            MovieId = 1,
+                            Category = "Action",
+                            Director = "Christopher Nolan",
+                            Edited = false,
+                            LentTo = "",
+                            Notes = "",
+                            Rating = "PG13",
+                            Title = "Inception",
+                            Year = 2010
+                        },
+                        new
+                        {
+                            MovieId = 2,
+                            Category = "Sci-fi/Adventure",
+                            Director = "Ridley Scott",
+                            Edited = false,
+                            LentTo = "",
+                            Notes = "",
+                            Rating = "PG13",
+                            Title = "The Martian",
+                            Year = 2015
+                        },
+                        new
+                        {
+                            MovieId = 3,
+                            Category = "Sci-fi/Action",
+                            Director = "Gareth Edwards",
+                            Edited = false,
+                            LentTo = "",
+                            Notes = "",
+                            Rating = "PG13",
+                            Title = "Rogue One",
+                            Year = 2016
+                        });
                 });
 #pragma warning restore 612, 618
         }
