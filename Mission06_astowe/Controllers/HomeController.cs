@@ -35,9 +35,20 @@ namespace Mission06_astowe.Controllers
         [HttpPost]
         public IActionResult AddMovie(NewMovie nm)
         {
-            movieContext.Add(nm);
-            movieContext.SaveChanges();
-            return View("Confirmation", nm);
+            if (ModelState.IsValid)
+            {
+                movieContext.Add(nm);
+                movieContext.SaveChanges();
+                return View("Confirmation", nm);
+            }
+
+            else
+            {
+                ViewBag.Categories = movieContext.Categories.ToList();
+
+                return View();
+            }
+            
         }
 
         [HttpGet]
@@ -49,6 +60,41 @@ namespace Mission06_astowe.Controllers
                 .ToList();
 
             return View(movies);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int movieid)
+        {
+            ViewBag.Categories = movieContext.Categories.ToList();
+
+            var movie = movieContext.movies.Single(x => x.MovieId == movieid);
+
+            return View("AddMovie", movie);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(NewMovie nm)
+        {
+            movieContext.Update(nm);
+            movieContext.SaveChanges();
+
+            return RedirectToAction("MovieList");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int movieid)
+        {
+            var movie = movieContext.movies.Single(x => x.MovieId == movieid);
+            return View(movie);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(NewMovie nm)
+        {
+            movieContext.movies.Remove(nm);
+            movieContext.SaveChanges();
+
+            return RedirectToAction("MovieList");
         }
 
     }

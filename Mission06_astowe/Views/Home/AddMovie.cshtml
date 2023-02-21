@@ -7,6 +7,8 @@
 <br />
 <div>
     <form method="post">
+        <div asp-validation-summary="All"></div>
+
         <label asp-for="Title">Movie Title: </label>
         <input asp-for="Title" type="text" id="title" required />
         <br />
