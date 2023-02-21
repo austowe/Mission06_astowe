@@ -11,12 +11,10 @@ namespace Mission06_astowe.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private MovieContext movieContext { get; set; }
         //constructor
-        public HomeController(ILogger<HomeController> logger, MovieContext mc)
+        public HomeController(MovieContext mc)
         {
-            _logger = logger;
             movieContext = mc;
         }
 
@@ -39,15 +37,13 @@ namespace Mission06_astowe.Controllers
             return View("Confirmation", nm);
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        public IActionResult MovieList()
         {
-            return View();
+            var movies = movieContext.responses.ToList();
+
+            return View(movies);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
